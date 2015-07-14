@@ -2,7 +2,12 @@ class Controller
   @$inject: []
 
   constructor: ->
-    @users = []
+    # FIXME: dummy data
+    @users = [
+      slackUsername: 'slack-bouzuya'
+      backlogUsername: 'backlog-bouzuya'
+      githubUsername: 'github-bouzuya'
+    ]
 
 module.exports = ->
   bindToController: true
