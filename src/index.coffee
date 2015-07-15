@@ -5,5 +5,6 @@ angular
   require('./templates').name
 ]
 .directive 'faApp', require './elements/fa-app'
+.directive 'faUserForm', require './elements/fa-user-form'
 .directive 'faUserList', require './elements/fa-user-list'
 .directive 'faUserSection', require './elements/fa-user-section'

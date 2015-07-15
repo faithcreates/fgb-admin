@@ -2,6 +2,10 @@ class Controller
   @$inject: []
 
   constructor: ->
+    @onUserAdded = @onUserAdded.bind @
+
+  onUserAdded: (user) ->
+    @users.push user
 
 module.exports = ->
   bindToController: true
