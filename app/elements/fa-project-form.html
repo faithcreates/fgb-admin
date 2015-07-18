@@ -1,0 +1,25 @@
+<form class="project-form">
+  <div class="form-control">
+    <label>
+      <span class="label-text">
+        Name
+      </span>
+      <input ng-model="c.project.name" />
+    </label>
+  </div>
+  <div class="form-control">
+    <label>
+      <span class="label-text">
+        Channel
+      </span>
+      <select
+        ng-model="c.project.channel"
+        ng-options="i.name for i in c.channels"
+        >
+      </select>
+    </label>
+  </div>
+  <button ng-click="c.addProject()">
+    Add Project
+  </button>
+</form>

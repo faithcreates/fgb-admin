@@ -2,6 +2,10 @@ class Controller
   @$inject: []
 
   constructor: ->
+    @onProjectAdded = @onProjectAdded.bind @
+
+  onProjectAdded: (project) ->
+    @projects.push project
 
 module.exports = ->
   bindToController: true
@@ -9,5 +13,6 @@ module.exports = ->
   controllerAs: 'c'
   restrict: 'E'
   scope:
+    channels: '='
     projects: '='
   templateUrl: '/elements/fa-project-section.html'

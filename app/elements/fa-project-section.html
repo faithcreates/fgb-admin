@@ -5,6 +5,12 @@
     </h1>
   </header>
   <div class="project-section-content">
+    <fa-project-form
+      channels="c.channels"
+      on-project-added="c.onProjectAdded"
+      >
+    </fa-project-form>
+
     <fa-project-list projects="c.projects">
     </fa-project-list>
   </div>
