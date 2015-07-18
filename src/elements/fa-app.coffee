@@ -3,7 +3,7 @@ class Controller
 
   constructor: ->
     @channels = [
-
+      name: 'slack-channel'
     ]
 
     # FIXME: dummy data
