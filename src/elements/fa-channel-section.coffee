@@ -2,6 +2,10 @@ class Controller
   @$inject: []
 
   constructor: ->
+    @onChannelAdded = @onChannelAdded.bind @
+
+  onChannelAdded: (channel) ->
+    @channels.push channel
 
 module.exports = ->
   bindToController: true

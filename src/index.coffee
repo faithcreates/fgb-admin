@@ -5,6 +5,7 @@ angular
   require('./templates').name
 ]
 .directive 'faApp', require './elements/fa-app'
+.directive 'faChannelForm', require './elements/fa-channel-form'
 .directive 'faChannelList', require './elements/fa-channel-list'
 .directive 'faChannelSection', require './elements/fa-channel-section'
 .directive 'faUserForm', require './elements/fa-user-form'
