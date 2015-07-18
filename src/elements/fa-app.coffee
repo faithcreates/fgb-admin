@@ -13,6 +13,11 @@ class Controller
       channel: @channels[0]
     ]
 
+    @repositories = [
+      name: 'github-repository'
+      project: @projects[0]
+    ]
+
     @users = [
       slackUsername: 'slack-bouzuya'
       backlogUsername: 'backlog-bouzuya'
