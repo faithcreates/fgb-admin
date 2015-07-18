@@ -14,6 +14,7 @@ angular
 .directive 'faRepositoryForm', require './elements/fa-repository-form'
 .directive 'faRepositoryList', require './elements/fa-repository-list'
 .directive 'faRepositorySection', require './elements/fa-repository-section'
+.directive 'faResourceNav', require './elements/fa-resource-nav'
 .directive 'faUserForm', require './elements/fa-user-form'
 .directive 'faUserList', require './elements/fa-user-list'
 .directive 'faUserSection', require './elements/fa-user-section'

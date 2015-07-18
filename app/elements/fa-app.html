@@ -5,19 +5,31 @@
   </h1>
 </header>
 <div class="root-section-content">
-  <fa-user-section users="c.users">
+  <fa-resource-nav>
+  </fa-resource-nav>
+
+
+  <fa-user-section
+    id="users"
+    users="c.users"
+    >
   </fa-user-section>
 
-  <fa-channel-section channels="c.channels">
+  <fa-channel-section
+    channels="c.channels"
+    id="channels"
+    >
   </fa-channel-section>
 
   <fa-project-section
     channels="c.channels"
+    id="projects"
     projects="c.projects"
     >
   </fa-project-section>
 
   <fa-repository-section
+    id="repository"
     projects="c.projects"
     repositories="c.repositories"
     >
