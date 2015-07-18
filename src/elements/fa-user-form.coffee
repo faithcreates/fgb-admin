@@ -6,7 +6,9 @@ class Controller
 
   addUser: ->
     return unless @_validate @user
-    @onUserAdded @user
+    u = @user
+    @user = {}
+    @onUserAdded u
 
   _validate: (user) ->
     return false unless user?
