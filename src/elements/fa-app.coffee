@@ -2,6 +2,10 @@ class Controller
   @$inject: []
 
   constructor: ->
+    @channels = [
+
+    ]
+
     # FIXME: dummy data
     @users = [
       slackUsername: 'slack-bouzuya'
