@@ -16,7 +16,18 @@ class UserService
     new Promise (resolve, reject) =>
       isValid = @_validate user
       return reject(new Error('validation error')) unless isValid
-      @_users.push user
+      @_request
+        method: 'POST'
+        url: 'http://localhost:3000/users/'
+        form: user
+        json: true
+      .then (res) =>
+        throw new Error('server error') unless res.statusCode is 201
+        @_users.push user
+        eventService = EventService.getInstance()
+        eventService.emit 'user:changed', users: @_users
+        null
+      .then resolve, reject
 
   fetchUsers: ->
     @_request

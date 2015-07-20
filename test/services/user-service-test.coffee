@@ -14,38 +14,25 @@ describe 'UserService', ->
     @sinon.restore()
     @eventService.removeAllListeners()
 
-  it 'works', (done) ->
-    user1 =
-      slackUsername: 'foo1'
-      backlogUsername: 'foo2'
-      githubUsername: 'foo3'
-    user2 =
-      slackUsername: 'bar1'
-      backlogUsername: 'bar2'
-      githubUsername: 'bar3'
-    user3 =
-      slackUsername: 'baz1'
-      backlogUsername: 'baz2'
-      githubUsername: 'baz3'
-    service = UserService.getInstance()
-    service.addUser user1
-    .then ->
-      service.addUser user2
-    .then ->
-      assert.deepEqual service.getUsers(), [user1, user2]
-    .then =>
-      @eventService.on 'user:changed', ({ users }) ->
-        assert.deepEqual users, [user1, user2, user3]
-        assert.deepEqual users, service.getUsers()
-        done()
-      service.addUser user3
-
   describe '#addUser', ->
-    it 'works', ->
+    beforeEach ->
+      @users = [
+        slackUsername: 'hoge1'
+        backlogUsername: 'hoge2'
+        githubUsername: 'hoge3'
+      ]
+      @sinon.stub request, 'Request', ({ callback }) =>
+        callback null, statusCode: 201
+
+    it 'works', (done) ->
       user =
         slackUsername: 'foo1'
         backlogUsername: 'foo2'
         githubUsername: 'foo3'
+      @eventService.on 'user:changed', ({ users }) ->
+        assert.deepEqual users, [user]
+        assert.deepEqual users, service.getUsers()
+        done()
       service = new UserService()
       service.addUser user
 
@@ -69,7 +56,7 @@ describe 'UserService', ->
       .catch (e) ->
         assert e.message is 'validation error'
 
-  describe '#fetchUsers', ->
+  describe '#fetchUsers / #getUsers', ->
     beforeEach ->
       @users = [
         slackUsername: 'hoge1'
@@ -80,8 +67,9 @@ describe 'UserService', ->
         callback null, body: @users
 
     it 'works', (done) ->
+      service = new UserService()
       @eventService.on 'user:changed', ({ users }) =>
         assert.deepEqual users, @users
+        assert.deepEqual users, service.getUsers()
         done()
-      service = new UserService()
       service.fetchUsers()
