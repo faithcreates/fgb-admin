@@ -1,3 +1,4 @@
+{Promise} = require 'es6-promise'
 {EventService} = require '../services/event-service'
 
 class UserService
@@ -11,10 +12,13 @@ class UserService
     @_users = []
 
   addUser: (user) ->
-    @_users.push user
-    eventService = EventService.getInstance()
-    eventService.emit 'user:changed', users: @_users
-    null
+    new Promise (resolve, reject) =>
+      isValid = @_validate user
+      return reject(new Error('validation error')) unless isValid
+      @_users.push user
+      eventService = EventService.getInstance()
+      eventService.emit 'user:changed', users: @_users
+      resolve null
 
   fetch: ->
     setTimeout =>
@@ -30,5 +34,12 @@ class UserService
 
   getUsers: ->
     @_users.slice()
+
+  _validate: (user) ->
+    return false unless user?
+    return false unless user.slackUsername?.length > 0
+    return false unless user.backlogUsername?.length > 0
+    return false unless user.githubUsername?.length > 0
+    true
 
 module.exports.UserService = UserService

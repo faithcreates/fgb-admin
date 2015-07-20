@@ -11,7 +11,8 @@
     "url": "https://github.com/bouzuya/fgb-admin/issues"
   },
   "dependencies": {
-    "angular": "^1.4.1"
+    "angular": "^1.4.1",
+    "es6-promise": "^2.3.0"
   },
   "devDependencies": {
     "browser-sync": "^2.7.13",

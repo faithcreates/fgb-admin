@@ -1,3 +1,5 @@
+{UserService} = require '../services/user-service'
+
 class Controller
   @$inject: []
 
@@ -5,23 +7,15 @@ class Controller
     @user = {}
 
   addUser: ->
-    return unless @_validate @user
-    u = @user
-    @user = {}
-    @onUserAdded u
-
-  _validate: (user) ->
-    return false unless user?
-    return false unless user.slackUsername?.length > 0
-    return false unless user.backlogUsername?.length > 0
-    return false unless user.githubUsername?.length > 0
-    true
+    userService = UserService.getInstance()
+    userService.addUser @user
+    .then =>
+      @user = {}
 
 module.exports = ->
   bindToController: true
   controller: Controller
   controllerAs: 'c'
   restrict: 'E'
-  scope:
-    onUserAdded: '='
+  scope: {}
   templateUrl: '/elements/fa-user-form.html'

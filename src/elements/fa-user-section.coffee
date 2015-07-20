@@ -7,8 +7,6 @@ class Controller
   ]
 
   constructor: (@$timeout) ->
-    @onUserAdded = @onUserAdded.bind @
-
     eventService = EventService.getInstance()
     eventService.on 'user:changed', ({ users }) =>
       @users = users
@@ -16,10 +14,6 @@ class Controller
 
     userService = UserService.getInstance()
     userService.fetch()
-
-  onUserAdded: (user) ->
-    userService = UserService.getInstance()
-    userService.addUser user
 
 module.exports = ->
   bindToController: true
