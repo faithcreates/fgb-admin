@@ -1,22 +1,35 @@
+{ChannelService} = require '../services/channel-service'
+{EventService} = require '../services/event-service'
+
 class Controller
-  @$inject: []
+  @$inject: [
+    '$timeout'
+  ]
 
-  constructor: ->
+  constructor: (@$timeout) ->
     # FIXME: dummy data
+    @channels = []
+    @projects = []
+    @repositories = []
 
-    @channels = [
-      name: 'slack-channel'
-    ]
+    eventService = EventService.getInstance()
+    eventService.on 'channel:changed', ({ channels }) =>
+      @channels = channels
 
-    @projects = [
-      name: 'backlog-project'
-      channel: @channels[0]
-    ]
+      # FIXME:
+      @projects = [
+        name: 'backlog-project'
+        channel: @channels[0]
+      ]
+      @repositories = [
+        name: 'github-repository'
+        project: @projects[0]
+      ]
 
-    @repositories = [
-      name: 'github-repository'
-      project: @projects[0]
-    ]
+      @$timeout ->
+
+    channelService = ChannelService.getInstance()
+    channelService.fetchChannels()
 
 module.exports = ->
   bindToController: true

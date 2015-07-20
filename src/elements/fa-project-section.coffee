@@ -13,6 +13,5 @@ module.exports = ->
   controllerAs: 'c'
   restrict: 'E'
   scope:
-    channels: '='
     projects: '='
   templateUrl: '/elements/fa-project-section.html'

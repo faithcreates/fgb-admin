@@ -1,3 +1,5 @@
+{ChannelService} = require '../services/channel-service'
+
 class Controller
   @$inject: []
 
@@ -5,21 +7,15 @@ class Controller
     @channel = {}
 
   addChannel: ->
-    return unless @_validate @channel
-    c = @channel
-    @channel = {}
-    @onChannelAdded c
-
-  _validate: (user) ->
-    return false unless user?
-    return false unless user.name?.length > 0
-    true
+    channelService = ChannelService.getInstance()
+    channelService.addChannel @channel
+    .then =>
+      @channel = {}
 
 module.exports = ->
   bindToController: true
   controller: Controller
   controllerAs: 'c'
   restrict: 'E'
-  scope:
-    onChannelAdded: '='
+  scope: {}
   templateUrl: '/elements/fa-channel-form.html'
