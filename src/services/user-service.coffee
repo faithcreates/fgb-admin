@@ -29,8 +29,28 @@ class UserService
         null
       .then resolve, reject
 
+  deleteUser: (user) ->
+    new Promise (resolve, reject) =>
+      @_request
+        method: 'DELETE'
+        url: 'http://localhost:3000/users/' + user.id
+        json: true
+      .then (res) =>
+        throw new Error('server error') unless res.statusCode is 204
+        index = -1
+        @_users.forEach (u, i) ->
+          return unless u.id is user.id
+          index = i
+        return null if index is -1
+        @_users.splice index, 1
+        eventService = EventService.getInstance()
+        eventService.emit 'user:changed', users: @_users
+        null
+      .then resolve, reject
+
   fetchUsers: ->
     @_request
+      method: 'GET'
       url: 'http://localhost:3000/users/'
       json: true
     .then (res) =>

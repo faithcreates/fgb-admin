@@ -56,6 +56,30 @@ describe 'UserService', ->
       .catch (e) ->
         assert e.message is 'validation error'
 
+  describe '#deleteUser / #getUsers', ->
+    beforeEach ->
+      callCount = 0
+      @sinon.stub request, 'Request', ({ callback }) ->
+        callCount += 1
+        if callCount is 1
+          callback null, statusCode: 201 # addUser
+        else if callCount is 2
+          callback null, statusCode: 204 # deleteUser
+
+    it 'works', (done) ->
+      user =
+        slackUsername: 'hoge1'
+        backlogUsername: 'hoge2'
+        githubUsername: 'hoge3'
+      service = new UserService()
+      service.addUser user
+      .then =>
+        @eventService.on 'user:changed', ({ users }) ->
+          assert.deepEqual users, []
+          assert.deepEqual users, service.getUsers()
+          done()
+        service.deleteUser user
+
   describe '#fetchUsers / #getUsers', ->
     beforeEach ->
       @users = [
