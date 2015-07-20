@@ -11,6 +11,7 @@ class UserService
 
   constructor: ->
     @_users = []
+    @_baseUrl = 'http://localhost:3000'
 
   addUser: (user) ->
     new Promise (resolve, reject) =>
@@ -18,7 +19,7 @@ class UserService
       return reject(new Error('validation error')) unless isValid
       @_request
         method: 'POST'
-        url: 'http://localhost:3000/users/'
+        url: @_baseUrl + '/users/'
         form: user
         json: true
       .then (res) =>
@@ -35,7 +36,7 @@ class UserService
     new Promise (resolve, reject) =>
       @_request
         method: 'DELETE'
-        url: 'http://localhost:3000/users/' + user.id
+        url: @_baseUrl + '/users/' + user.id
         json: true
       .then (res) =>
         if res.statusCode < 200 and 300 <= res.statusCode
@@ -54,7 +55,7 @@ class UserService
   fetchUsers: ->
     @_request
       method: 'GET'
-      url: 'http://localhost:3000/users/'
+      url: @_baseUrl + '/users/'
       json: true
     .then (res) =>
       @_users = res.body
