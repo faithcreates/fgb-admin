@@ -26,7 +26,11 @@ class UserService
         unless res.statusCode is 201
           throw new Error 'server error'
         user.id = res.body.id
-        @_users.push user
+        @_users.push
+          id: res.body.id
+          slackUsername: user.slackUsername
+          backlogUsername: user.backlogUsername
+          githubUsername: user.githubUsername
         eventService = EventService.getInstance()
         eventService.emit 'user:changed', users: @_users
         null
