@@ -16,25 +16,29 @@ describe 'UserService', ->
 
   describe '#addUser', ->
     beforeEach ->
-      @users = [
-        slackUsername: 'hoge1'
-        backlogUsername: 'hoge2'
-        githubUsername: 'hoge3'
-      ]
-      @sinon.stub request, 'Request', ({ callback }) =>
-        callback null, statusCode: 201
-
-    it 'works', (done) ->
-      user =
+      @user =
         slackUsername: 'foo1'
         backlogUsername: 'foo2'
         githubUsername: 'foo3'
-      @eventService.on 'user:changed', ({ users }) ->
-        assert.deepEqual users, [user]
+      @sinon.stub request, 'Request', ({ callback }) =>
+        callback null, statusCode: 201, body:
+          id: '123'
+          slackUsername: @user.slackUsername
+          backlogUsername: @user.backlogUsername
+          githubUsername: @user.githubUsername
+
+    it 'works', (done) ->
+      @eventService.on 'user:changed', ({ users }) =>
+        assert.deepEqual users, [
+          id: '123'
+          slackUsername: @user.slackUsername
+          backlogUsername: @user.backlogUsername
+          githubUsername: @user.githubUsername
+        ]
         assert.deepEqual users, service.getUsers()
         done()
       service = new UserService()
-      service.addUser user
+      service.addUser @user
 
     it 'works', ->
       user =
@@ -58,31 +62,45 @@ describe 'UserService', ->
 
   describe '#deleteUser / #getUsers', ->
     beforeEach ->
+      @user =
+        slackUsername: 'hoge1'
+        backlogUsername: 'hoge2'
+        githubUsername: 'hoge3'
       callCount = 0
-      @sinon.stub request, 'Request', ({ callback }) ->
+      @sinon.stub request, 'Request', ({ callback }) =>
         callCount += 1
         if callCount is 1
-          callback null, statusCode: 201 # addUser
+          # addUser
+          callback null, statusCode: 201, body:
+            id: '123'
+            slackUsername: @user.slackUsername
+            backlogUsername: @user.backlogUsername
+            githubUsername: @user.githubUsername
         else if callCount is 2
           callback null, statusCode: 204 # deleteUser
 
     it 'works', (done) ->
-      user =
-        slackUsername: 'hoge1'
-        backlogUsername: 'hoge2'
-        githubUsername: 'hoge3'
       service = new UserService()
-      service.addUser user
+      service.addUser @user
       .then =>
+        # before: 1 item
+        assert.deepEqual [
+          id: '123'
+          slackUsername: @user.slackUsername
+          backlogUsername: @user.backlogUsername
+          githubUsername: @user.githubUsername
+        ], service.getUsers()
         @eventService.on 'user:changed', ({ users }) ->
+          # after: no item
           assert.deepEqual users, []
           assert.deepEqual users, service.getUsers()
           done()
-        service.deleteUser user
+        service.deleteUser { id: '123' }
 
   describe '#fetchUsers / #getUsers', ->
     beforeEach ->
       @users = [
+        id: '123'
         slackUsername: 'hoge1'
         backlogUsername: 'hoge2'
         githubUsername: 'hoge3'

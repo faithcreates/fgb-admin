@@ -17,6 +17,10 @@ class Controller
     userService = UserService.getInstance()
     userService.fetchUsers()
 
+  deleteUser: (user) ->
+    userService = UserService.getInstance()
+    userService.deleteUser user
+
 module.exports = ->
   bindToController: true
   controller: Controller

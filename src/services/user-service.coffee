@@ -22,7 +22,9 @@ class UserService
         form: user
         json: true
       .then (res) =>
-        throw new Error('server error') unless res.statusCode is 201
+        unless res.statusCode is 201
+          throw new Error 'server error'
+        user.id = res.body.id
         @_users.push user
         eventService = EventService.getInstance()
         eventService.emit 'user:changed', users: @_users
@@ -36,7 +38,8 @@ class UserService
         url: 'http://localhost:3000/users/' + user.id
         json: true
       .then (res) =>
-        throw new Error('server error') unless res.statusCode is 204
+        if res.statusCode < 200 and 300 <= res.statusCode
+          throw new Error 'server error'
         index = -1
         @_users.forEach (u, i) ->
           return unless u.id is user.id

@@ -2,6 +2,9 @@
   <thead>
     <tr>
       <th>
+        &nbsp;
+      </th>
+      <th>
         Slack Username
       </th>
       <th>
@@ -17,6 +20,13 @@
       class="user-list-item"
       ng-repeat="i in c.users"
       >
+      <td class="user-list-item-delete-button">
+        <button
+          ng-click="c.deleteUser(i)"
+          >
+          Delete User
+        </button>
+      </td>
       <td
         class="user-list-item-slack-username"
         ng-bind="i.slackUsername"
