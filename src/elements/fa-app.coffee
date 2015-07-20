@@ -18,12 +18,6 @@ class Controller
       project: @projects[0]
     ]
 
-    @users = [
-      slackUsername: 'slack-bouzuya'
-      backlogUsername: 'backlog-bouzuya'
-      githubUsername: 'github-bouzuya'
-    ]
-
 module.exports = ->
   bindToController: true
   controller: Controller
