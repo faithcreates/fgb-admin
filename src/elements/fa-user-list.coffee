@@ -15,7 +15,7 @@ class Controller
       @$timeout ->
 
     userService = UserService.getInstance()
-    userService.fetch()
+    userService.fetchUsers()
 
 module.exports = ->
   bindToController: true

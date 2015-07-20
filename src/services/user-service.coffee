@@ -1,4 +1,5 @@
 {Promise} = require 'es6-promise'
+request = require 'request'
 {EventService} = require '../services/event-service'
 
 class UserService
@@ -16,24 +17,25 @@ class UserService
       isValid = @_validate user
       return reject(new Error('validation error')) unless isValid
       @_users.push user
-      eventService = EventService.getInstance()
-      eventService.emit 'user:changed', users: @_users
-      resolve null
 
-  fetch: ->
-    setTimeout =>
-      @_users = [
-        slackUsername: 'slack-bouzuya'
-        backlogUsername: 'backlog-bouzuya'
-        githubUsername: 'github-bouzuya'
-      ]
+  fetchUsers: ->
+    @_request
+      url: 'http://localhost:3000/users/'
+      json: true
+    .then (res) =>
+      @_users = res.body
       eventService = EventService.getInstance()
       eventService.emit 'user:changed', users: @_users
-    , 0
-    null
+      null
 
   getUsers: ->
     @_users.slice()
+
+  _request: (options) ->
+    new Promise (resolve, reject) ->
+      request options, (err, res) ->
+        return reject(err) if err?
+        resolve res
 
   _validate: (user) ->
     return false unless user?

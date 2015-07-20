@@ -1,13 +1,17 @@
 assert = require 'power-assert'
+request = require 'request'
+sinon = require 'sinon'
 {EventService} = require '../../src/services/event-service'
 {UserService} = require '../../src/services/user-service'
 
 describe 'UserService', ->
   beforeEach ->
+    @sinon = sinon.sandbox.create()
     @eventService = EventService.getInstance()
     @eventService.removeAllListeners()
 
   afterEach ->
+    @sinon.restore()
     @eventService.removeAllListeners()
 
   it 'works', (done) ->
@@ -64,3 +68,20 @@ describe 'UserService', ->
       service.addUser user
       .catch (e) ->
         assert e.message is 'validation error'
+
+  describe '#fetchUsers', ->
+    beforeEach ->
+      @users = [
+        slackUsername: 'hoge1'
+        backlogUsername: 'hoge2'
+        githubUsername: 'hoge3'
+      ]
+      @sinon.stub request, 'Request', ({ callback }) =>
+        callback null, body: @users
+
+    it 'works', (done) ->
+      @eventService.on 'user:changed', ({ users }) =>
+        assert.deepEqual users, @users
+        done()
+      service = new UserService()
+      service.fetchUsers()

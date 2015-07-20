@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "angular": "^1.4.1",
-    "es6-promise": "^2.3.0"
+    "es6-promise": "^2.3.0",
+    "request": "^2.58.0"
   },
   "devDependencies": {
     "browser-sync": "^2.7.13",
