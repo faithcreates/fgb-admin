@@ -1,13 +1,26 @@
-class Controller
-  @$inject: []
+{EventService} = require '../services/event-service'
+{UserService} = require '../services/user-service'
 
-  constructor: ->
+class Controller
+  @$inject: [
+    '$timeout'
+  ]
+
+  constructor: (@$timeout) ->
+    @users = []
+
+    eventService = EventService.getInstance()
+    eventService.on 'user:changed', ({ users }) =>
+      @users = users
+      @$timeout ->
+
+    userService = UserService.getInstance()
+    userService.fetch()
 
 module.exports = ->
   bindToController: true
   controller: Controller
   controllerAs: 'c'
   restrict: 'E'
-  scope:
-    users: '='
+  scope: {}
   templateUrl: '/elements/fa-user-list.html'
