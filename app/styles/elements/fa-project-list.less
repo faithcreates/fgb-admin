@@ -1,4 +1,4 @@
-@import "../variables/colors";
+@import "../mixins/list-item";
 @import "../mixins/list";
 
 fa-project-list {
@@ -7,11 +7,7 @@ fa-project-list {
   }
 
   .project-list-item {
-    border-top: 1px solid @list-border-color;
-
-    &:last-child {
-      border-bottom: 1px solid @list-border-color;
-    }
+    .list-item();
   }
 
   .project-list-item-name {
