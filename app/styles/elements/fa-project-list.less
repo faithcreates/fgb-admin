@@ -1,9 +1,17 @@
+@import "../variables/colors";
+
 fa-project-list {
   .project-list {
     table-layout: fixed;
+    width: 100%;
   }
 
   .project-list-item {
+    border-top: 1px solid @list-border-color;
+
+    &:last-child {
+      border-bottom: 1px solid @list-border-color;
+    }
   }
 
   .project-list-item-name {

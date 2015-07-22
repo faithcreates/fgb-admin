@@ -1,9 +1,17 @@
+@import "../variables/colors";
+
 fa-channel-list {
   .channel-list {
     table-layout: fixed;
+    width: 100%;
   }
 
   .channel-list-item {
+    border-top: 1px solid @list-border-color;
+
+    &:last-child {
+      border-bottom: 1px solid @list-border-color;
+    }
   }
 
   .channel-list-item-name {

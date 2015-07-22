@@ -1,9 +1,17 @@
+@import "../variables/colors";
+
 fa-repository-list {
   .repository-list {
     table-layout: fixed;
+    width: 100%;
   }
 
   .repository-list-item {
+    border-top: 1px solid @list-border-color;
+
+    &:last-child {
+      border-bottom: 1px solid @list-border-color;
+    }
   }
 
   .repository-list-item-name {
