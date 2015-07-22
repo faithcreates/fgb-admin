@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "slackUsername": "user1",
+      "backlogUsername": "user2",
+      "githubUsername": "user3",
+      "id": "3cbcb02a-356c-4f17-ac9b-96f1d6f0432a"
+    }
+  ],
+  "channels": [
+    {
+      "name": "channel1",
+      "id": "7629430d-50bb-4fb1-b3eb-512e94915235"
+    }
+  ],
+  "projects": [
+    {
+      "name": "project1",
+      "channelId": "7629430d-50bb-4fb1-b3eb-512e94915235",
+      "id": "617afcfe-e813-4990-b1ef-d1a753b670b5"
+    }
+  ],
+  "repositories": [
+    {
+      "name": "repository1",
+      "projectId": "617afcfe-e813-4990-b1ef-d1a753b670b5",
+      "id": "f8fe3afe-917a-409c-8d65-7289b921d9dd"
+    }
+  ]
+}
