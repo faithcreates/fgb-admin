@@ -1,27 +1,34 @@
-class Controller
-  @$inject: []
+{EventService} = require '../services/event-service'
+{ProjectService} = require '../services/project-service'
+{RepositoryService} = require '../services/repository-service'
 
-  constructor: ->
+class Controller
+  @$inject: [
+    '$timeout'
+  ]
+
+  constructor: (@$timeout) ->
     @repository = {}
+    @projects = []
+
+    eventService = EventService.getInstance()
+    eventService.on 'project:changed', ({ projects }) =>
+      @projects = projects
+      @$timeout ->
+
+    projectService = ProjectService.getInstance()
+    projectService.fetchProjects()
 
   addRepository: ->
-    return unless @_validate @repository
-    r = @repository
-    @repository = {}
-    @onRepositoryAdded r
-
-  _validate: (repository) ->
-    return false unless repository?
-    return false unless repository.name?.length > 0
-    return false unless repository.project?
-    true
+    repositoryService = RepositoryService.getInstance()
+    repositoryService.addRepository @repository
+    .then =>
+      @repository
 
 module.exports = ->
   bindToController: true
   controller: Controller
   controllerAs: 'c'
   restrict: 'E'
-  scope:
-    onRepositoryAdded: '='
-    projects: '='
+  scope: {}
   templateUrl: '/elements/fa-repository-form.html'
