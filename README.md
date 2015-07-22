@@ -2,6 +2,22 @@
 
 A single-page application for fgb-api.
 
+## Development
+
+### Terminal 1
+
+```
+$ npm install
+$ npm run watch
+```
+
+### Terminal 2
+
+```
+$ npm install -g json-server
+$ json-server test/fixtures/db.json
+```
+
 ## License
 
 [MIT](LICENSE)
