@@ -1,5 +1,6 @@
 {ChannelService} = require '../services/channel-service'
 {EventService} = require '../services/event-service'
+{ProjectService} = require '../services/project-service'
 
 class Controller
   @$inject: [
@@ -19,22 +20,15 @@ class Controller
     channelService.fetchChannels()
 
   addProject: ->
-    return unless @_validate @project
-    p = @project
-    @project = {}
-    @onProjectAdded p
-
-  _validate: (project) ->
-    return false unless project?
-    return false unless project.name?.length > 0
-    return false unless project.channel?
-    true
+    projectService = ProjectService.getInstance()
+    projectService.addProject @project
+    .then =>
+      @project = {}
 
 module.exports = ->
   bindToController: true
   controller: Controller
   controllerAs: 'c'
   restrict: 'E'
-  scope:
-    onProjectAdded: '='
+  scope: {}
   templateUrl: '/elements/fa-project-form.html'
