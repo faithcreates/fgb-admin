@@ -67,6 +67,11 @@ class ProjectService
       json: true
     .then (res) =>
       @_projects = res.body
+      channelService = ChannelService.getInstance()
+      channels = channelService.getChannels()
+      @_projects.forEach (i) ->
+        i.channel = channels.filter((j) -> j.id is i.channelId)[0]
+        i.channelId = null
       eventService = EventService.getInstance()
       eventService.emit 'project:changed', projects: @_projects
       null
