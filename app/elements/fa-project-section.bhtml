@@ -1,0 +1,11 @@
+<section
+  @class project-section
+  <header
+    @class project-section-header
+    <h1
+      @class project-section-title
+      >Backlog Projects
+  <div
+    @class project-section-content
+    <fa-project-form
+    <fa-project-list

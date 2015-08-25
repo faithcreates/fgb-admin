@@ -1,0 +1,11 @@
+<section
+  @class user-section
+  <header
+    @class user-section-header
+    <h1
+      @class user-section-title
+      >Users
+  <div
+    @class user-section-content
+    <fa-user-form
+    <fa-user-list

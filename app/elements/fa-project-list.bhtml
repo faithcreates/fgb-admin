@@ -1,0 +1,18 @@
+<table
+  @class project-list
+  <thead
+    <tr
+      <th
+        >Name
+      <th
+        >Channel Name
+  <tbody
+    <tr
+      @class project-list-item
+      @ng-repeat i in c.projects
+      <td
+        @class project-list-item-name
+        @ng-bind i.name
+      <td
+        @class project-list-item-channel-name
+        @ng-bind i.channel.name

@@ -1,0 +1,13 @@
+<table
+  @class channel-list
+  <thead
+    <tr
+      <th
+        >Name
+  <tbody
+    <tr
+      @class channel-list-item
+      @ng-repeat i in c.channels
+      <td
+        @class channel-list-item-name
+        @ng-bind i.name

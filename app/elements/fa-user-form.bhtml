@@ -1,0 +1,29 @@
+<form
+  @class user-form
+  <div
+    @class form-control
+    <label
+      <span
+        @class label-text
+        >Slack Username
+      </input
+        @ng-model c.user.slackUsername
+  <div
+    @class form-control
+    <label
+      <span
+        @class label-text
+        >Backlog Username
+      </input
+        @ng-model c.user.backlogUsername
+  <div
+    @class form-control
+    <label
+      <span
+        @class label-text
+        >GitHub Username
+      </input
+        @ng-model c.user.githubUsername
+  <button
+    @ng-click c.addUser()
+    >Add User

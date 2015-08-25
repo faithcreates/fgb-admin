@@ -1,0 +1,17 @@
+><!DOCTYPE html>
+<html
+  @lang ja
+  @ng-app app
+  <head
+    </meta
+      @charset utf-8
+    <title
+      >fgb-admin
+    </link
+      @rel stylesheet
+      @type text/css
+      @href /index.css
+  <body
+    <fa-app
+    <script
+      @src /bundle.js

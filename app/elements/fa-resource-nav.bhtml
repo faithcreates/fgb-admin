@@ -1,0 +1,28 @@
+<nav
+  @class resource-nav
+  <ul
+    @class resource-list
+    <li
+      @class resource-list-item
+      <div
+        <a
+          @href #users
+          >Users
+    <li
+      @class resource-list-item
+      <div
+        <a
+          @href #channels
+          >Slack Channels
+    <li
+      @class resource-list-item
+      <div
+        <a
+          @href #projects
+          >Backlog Projects
+    <li
+      @class resource-list-item
+      <div
+        <a
+          @href #repositories
+          >GitHub Repositories

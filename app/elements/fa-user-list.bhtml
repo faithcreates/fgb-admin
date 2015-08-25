@@ -1,0 +1,30 @@
+<table
+  @class user-list
+  <thead
+    <tr
+      <th
+        >&nbsp;
+      <th
+        >Slack Username
+      <th
+        >Backlog Username
+      <th
+        >GitHub Username
+  <tbody
+    <tr
+      @class user-list-item
+      @ng-repeat i in c.users
+      <td
+        @class user-list-item-delete-button
+        <button
+          @ng-click c.deleteUser(i)
+          >Delete User
+      <td
+        @class user-list-item-slack-username
+        @ng-bind i.slackUsername
+      <td
+        @class user-list-item-backlog-username
+        @ng-bind i.backlogUsername
+      <td
+        @class user-list-item-github-username
+        @ng-bind i.githubUsername

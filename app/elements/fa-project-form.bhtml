@@ -1,0 +1,22 @@
+<form
+  @class project-form
+  <div
+    @class form-control
+    <label
+      <span
+        @class label-text
+        >Name
+      </input
+        @ng-model c.project.name
+  <div
+    @class form-control
+    <label
+      <span
+        @class label-text
+        >Channel
+      <select
+        @ng-model c.project.channel
+        @ng-options i.name for i in c.channels
+  <button
+    @ng-click c.addProject()
+    >Add Project

@@ -1,0 +1,22 @@
+<form
+  @class repository-form
+  <div
+    @class form-control
+    <label
+      <span
+        @class label-text
+        >Name
+      </input
+        @ng-model c.repository.name
+  <div
+    @class form-control
+    <label
+      <span
+        @class label-text
+        >Project
+      <select
+        @ng-model c.repository.project
+        @ng-options i.name for i in c.projects
+  <button
+    @ng-click c.addRepository()
+    >Add Repository

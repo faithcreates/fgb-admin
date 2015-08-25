@@ -1,0 +1,23 @@
+<table
+  @class repository-list
+  <thead
+    <tr
+      <th
+        >Name
+      <th
+        >Project Name
+      <th
+        >Channel Name
+  <tbody
+    <tr
+      @class repository-list-item
+      @ng-repeat i in c.repositories
+      <td
+        @class repository-list-item-name
+        @ng-bind i.name
+      <td
+        @class repository-list-item-project-name
+        @ng-bind i.project.name
+      <td
+        @class repository-list-item-channel-name
+        @ng-bind i.project.channel.name

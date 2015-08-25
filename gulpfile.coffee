@@ -1,4 +1,5 @@
 angularTemplateCache = require 'gulp-angular-templatecache'
+bHtml = require 'gulp-b-html'
 browserify = require 'browserify'
 browserSync = require 'browser-sync'
 buffer = require 'vinyl-buffer'
@@ -63,7 +64,8 @@ gulp.task 'build:coffee(dev)', ->
   .pipe gulp.dest dirs.tmpSrc
 
 gulp.task 'build:html', ->
-  gulp.src dirs.app + 'index.html'
+  gulp.src dirs.app + 'index.bhtml'
+  .pipe bHtml()
   .pipe gulp.dest dirs.dist
 
 gulp.task 'build:js', ->
@@ -99,7 +101,8 @@ gulp.task 'build:less(dev)', ->
   .pipe gulp.dest dirs.dist
 
 gulp.task 'build:template', ->
-  gulp.src dirs.app + '**/*.html'
+  gulp.src dirs.app + '**/*.bhtml'
+  .pipe bHtml()
   .pipe angularTemplateCache
     moduleSystem: 'Browserify'
     module: 'templates'
@@ -202,4 +205,3 @@ gulp.task 'watch', ['build(dev)'], ->
   w.on 'update', bundle
   w.on 'log', gutil.log.bind(gutil)
   bundle()
-

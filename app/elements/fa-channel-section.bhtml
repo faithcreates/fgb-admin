@@ -1,0 +1,11 @@
+<section
+  @class channel-section
+  <header
+    @class channel-section-header
+    <h1
+      @class channel-section-title
+      >Slack Channels
+  <div
+    @class channel-section-content
+    <fa-channel-form
+    <fa-channel-list
