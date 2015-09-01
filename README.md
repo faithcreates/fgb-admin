@@ -22,7 +22,7 @@ $ json-server test/fixtures/db.json
 
 name                           | value
 -------------------------------|-------------------------------
-API\_BASE\_URL                 | `http://localhost:3000`
+API\_BASE\_URL                 | (build) `http://localhost:3000`
 
 ## License
 
