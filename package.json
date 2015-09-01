@@ -20,6 +20,7 @@
     "browserify": "^10.2.6",
     "coffee-script": "^1.9.3",
     "del": "^1.2.0",
+    "fs-extra": "^0.24.0",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.7.0",
     "gulp-b-html": "^0.2.0",

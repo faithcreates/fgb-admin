@@ -1,5 +1,6 @@
 {Promise} = require 'es6-promise'
 request = require 'request'
+config = require '../configs/config'
 {EventService} = require '../services/event-service'
 
 class UserService
@@ -11,7 +12,7 @@ class UserService
 
   constructor: ->
     @_users = []
-    @_baseUrl = process.env.API_BASE_URL
+    @_baseUrl = config.apiBaseUrl
 
   addUser: (user) ->
     new Promise (resolve, reject) =>

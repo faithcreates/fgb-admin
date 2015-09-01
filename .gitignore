@@ -1,6 +1,8 @@
 *.log
 .envrc
+.idea
 .tmp
 coverage
 dist
 node_modules
+src/configs/config.coffee
