@@ -1,16 +1,18 @@
 angularTemplateCache = require 'gulp-angular-templatecache'
 bHtml = require 'gulp-b-html'
-browserify = require 'browserify'
 browserSync = require 'browser-sync'
+browserify = require 'browserify'
 buffer = require 'vinyl-buffer'
 coffee = require 'gulp-coffee'
 del = require 'del'
 espower = require 'gulp-espower'
+fs = require 'fs-extra'
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 less = require 'gulp-less'
 minifyCss = require 'gulp-minify-css'
 mocha = require 'gulp-mocha'
+path = require 'path'
 run = require 'run-sequence'
 source = require 'vinyl-source-stream'
 sourcemaps = require 'gulp-sourcemaps'
@@ -33,6 +35,7 @@ ignoreError = (stream) ->
 
 gulp.task 'build', (done) ->
   run.apply run, [
+    'env'
     'build:less'
     'build:template'
     'build:html'
@@ -43,6 +46,7 @@ gulp.task 'build', (done) ->
 
 gulp.task 'build(dev)', (done) ->
   run.apply run, [
+    'env'
     'build:less(dev)'
     'build:template'
     'build:html'
@@ -141,6 +145,14 @@ gulp.task 'default', (done) ->
     done
   ]
   null
+
+gulp.task 'env', ->
+  configFile = path.resolve __dirname, './src/configs/config.coffee'
+  fs.outputFile configFile, """
+    module.exports = {
+      apiBaseUrl: '#{process.env.API_BASE_URL}'
+    }
+    """
 
 gulp.task 'test', ['build', 'build-test'], ->
   gulp.src dirs.tmpTest + '**/*.js'

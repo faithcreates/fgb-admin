@@ -1,5 +1,6 @@
 {Promise} = require 'es6-promise'
 request = require 'request'
+config = require '../configs/config'
 {EventService} = require '../services/event-service'
 {ProjectService} = require '../services/project-service'
 
@@ -12,7 +13,7 @@ class RepositoryService
 
   constructor: ->
     @_repositories = []
-    @_baseUrl = process.env.API_BASE_URL
+    @_baseUrl = config.apiBaseUrl
 
   addRepository: (repository) ->
     new Promise (resolve, reject) =>

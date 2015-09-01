@@ -1,5 +1,6 @@
 {Promise} = require 'es6-promise'
 request = require 'request'
+config = require '../configs/config'
 {ChannelService} = require '../services/channel-service'
 {EventService} = require '../services/event-service'
 
@@ -12,7 +13,7 @@ class ProjectService
 
   constructor: ->
     @_projects = []
-    @_baseUrl = process.env.API_BASE_URL
+    @_baseUrl = config.apiBaseUrl
 
   addProject: (project) ->
     new Promise (resolve, reject) =>
