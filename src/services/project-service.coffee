@@ -12,7 +12,7 @@ class ProjectService
 
   constructor: ->
     @_projects = []
-    @_baseUrl = 'http://localhost:3000'
+    @_baseUrl = process.env.API_BASE_URL
 
   addProject: (project) ->
     new Promise (resolve, reject) =>

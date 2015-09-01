@@ -11,7 +11,7 @@ class UserService
 
   constructor: ->
     @_users = []
-    @_baseUrl = 'http://localhost:3000'
+    @_baseUrl = process.env.API_BASE_URL
 
   addUser: (user) ->
     new Promise (resolve, reject) =>

@@ -11,7 +11,7 @@ class ChannelService
 
   constructor: ->
     @_channels = []
-    @_baseUrl = 'http://localhost:3000'
+    @_baseUrl = process.env.API_BASE_URL
 
   addChannel: (channel) ->
     new Promise (resolve, reject) =>

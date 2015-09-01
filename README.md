@@ -18,6 +18,12 @@ $ npm install -g json-server
 $ json-server test/fixtures/db.json
 ```
 
+## Configuration
+
+name                           | value
+-------------------------------|-------------------------------
+API\_BASE\_URL                 | `http://localhost:3000`
+
 ## License
 
 [MIT](LICENSE)

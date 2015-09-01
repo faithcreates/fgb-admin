@@ -12,7 +12,7 @@ class RepositoryService
 
   constructor: ->
     @_repositories = []
-    @_baseUrl = 'http://localhost:3000'
+    @_baseUrl = process.env.API_BASE_URL
 
   addRepository: (repository) ->
     new Promise (resolve, reject) =>
